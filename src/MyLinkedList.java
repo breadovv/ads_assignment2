@@ -84,6 +84,12 @@ public class MyLinkedList<T> implements MyList<T> {
         node.data = item;
     }
 
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + " out of bounds");
+        }
+    }
+
     @Override
     public T get(int index) {
         return getNode(index).data;
@@ -101,27 +107,49 @@ public class MyLinkedList<T> implements MyList<T> {
         return tail.data;
     }
 
+//    @Override
+//    public T remove(int index) {
+//        if (index < 0 || index >= size)
+//            throw new IndexOutOfBoundsException("Index: " + index);
+//
+//        MyNode toRemove = getNode(index);
+//
+//        if (toRemove.prev != null) {
+//            toRemove.prev.next = toRemove.next;
+//        } else {
+//            head = toRemove.next;
+//        }
+//
+//        if (toRemove.next != null) {
+//            toRemove.next.prev = toRemove.prev;
+//        } else {
+//            tail = toRemove.prev;
+//        }
+//
+//        size--;
+//    }
     @Override
-    public void remove(int index) {
-        if (index < 0 || index >= size)
-            throw new IndexOutOfBoundsException("Index: " + index);
+    public T remove(int index) {
+        checkIndex(index);
+        MyNode current = getNode(index);
+        T removed = current.data;
 
-        MyNode toRemove = getNode(index);
-
-        if (toRemove.prev != null) {
-            toRemove.prev.next = toRemove.next;
+        if (current.prev != null) {
+            current.prev.next = current.next;
         } else {
-            head = toRemove.next;
+            head = current.next;
         }
 
-        if (toRemove.next != null) {
-            toRemove.next.prev = toRemove.prev;
+        if (current.next != null) {
+            current.next.prev = current.prev;
         } else {
-            tail = toRemove.prev;
+            tail = current.prev;
         }
 
         size--;
+        return removed;
     }
+
 
     @Override
     public void removeFirst() {

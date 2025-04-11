@@ -10,7 +10,7 @@ public interface MyList<T> extends Iterable<T> {
     T getFirst();                             // Get first element
     T getLast();                              // Get last element
 
-    void remove(int index);                   // Remove by index
+    T remove(int index);                   // Remove by index
     void removeFirst();                       // Remove first element
     void removeLast();                        // Remove last element
 

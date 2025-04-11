@@ -65,14 +65,25 @@ public class MyArrayList<T> implements MyList<T> {
         return get(length - 1);
     }
 
+//    @Override
+//    public void remove(int index) {
+//        checkIndex(index);
+//        for (int i = index; i < length - 1; i++) {
+//            elements[i] = elements[i + 1];
+//        }
+//        elements[--length] = null;
+//    }
     @Override
-    public void remove(int index) {
+    public T remove(int index) {
         checkIndex(index);
+        T removedElement = (T) elements[index];
         for (int i = index; i < length - 1; i++) {
             elements[i] = elements[i + 1];
         }
         elements[--length] = null;
+        return removedElement;
     }
+
 
     @Override
     public void removeFirst() {
